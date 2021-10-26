@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { PropertyModule } from './property/property.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import { PropertyModule } from './property/property.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    PropertyModule],
+    PropertyModule,
+    AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })
