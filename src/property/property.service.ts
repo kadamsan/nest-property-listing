@@ -15,9 +15,9 @@ export class PropertyService {
     return this.propertyRepo.insert(createPropertyDto)    
   }
 
-  findAll(): Promise<Property[]> {
+  findAll(take: number = 10, skip: number = 0): Promise<Property[]> {
     console.log('fetching.....');
-    return this.propertyRepo.find();
+    return this.propertyRepo.find({ skip, take });
   }
 
   findOne(id: number) {

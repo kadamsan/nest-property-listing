@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, Query } from '@nestjs/common';
 import { PropertyService } from './property.service';
 import { CreatePropertyDto } from './dto/create-property.dto';
 import { UpdatePropertyDto } from './dto/update-property.dto';
@@ -15,8 +15,8 @@ export class PropertyController {
   }
 
   @Get()
-  findAll(): Promise<Property[]> {
-    return this.propertyService.findAll();
+  findAll(@Query() { take, skip }): Promise<Property[]> {
+    return this.propertyService.findAll(+take, +skip);
   }
 
   @Get(':id')
