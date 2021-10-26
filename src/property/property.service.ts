@@ -15,9 +15,12 @@ export class PropertyService {
     return this.propertyRepo.insert(createPropertyDto)    
   }
 
-  findAll(take: number = 10, skip: number = 0): Promise<Property[]> {
+  findAll(take: number = 10, skip: number = 0, locality: string): Promise<Property[]> {
     console.log('fetching.....');
-    return this.propertyRepo.find({ skip, take });
+    if(locality)
+      return this.propertyRepo.find({ where: { locality: locality }, skip, take });
+    else 
+      return this.propertyRepo.find({ skip, take });
   }
 
   findOne(id: number) {

@@ -15,8 +15,8 @@ export class PropertyController {
   }
 
   @Get()
-  findAll(@Query() { take, skip }): Promise<Property[]> {
-    return this.propertyService.findAll(+take, +skip);
+  findAll(@Query() { take, skip, locality }): Promise<Property[]> {
+    return this.propertyService.findAll(+take, +skip, locality);
   }
 
   @Get(':id')
