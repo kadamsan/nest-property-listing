@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { PropertyModule } from './property/property.module';
 import { AuthModule } from './auth/auth.module';
+import { MailModule } from './mail/mail.module';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { AuthModule } from './auth/auth.module';
       synchronize: true,
     }),
     PropertyModule,
-    AuthModule],
+    AuthModule,
+    MailModule],
   controllers: [AppController],
   providers: [AppService],
 })

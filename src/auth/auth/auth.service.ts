@@ -1,5 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { MailService } from 'src/mail/mail.service';
 import { CreateUserDto } from '../user/dto/create-user.dto';
 import { UpdateUserDto } from '../user/dto/update-user.dto';
 import { User } from '../user/entities/user.entity';
@@ -10,7 +11,8 @@ export class AuthService {
 
     constructor(
         private readonly userService: UserService,
-        private readonly jwtService: JwtService
+        private readonly jwtService: JwtService,
+        private readonly mailService: MailService
     ) { }
 
     private validate(userData: UpdateUserDto): Promise<User> {
@@ -40,7 +42,11 @@ export class AuthService {
         });
     }
     
-    register(user: CreateUserDto): Promise<any>{
-        return this.userService.create(user)
+    async register(user: CreateUserDto): Promise<any>{
+        const result = await this.userService.create(user);
+        // send confirmation mail
+        await this.mailService.sendUserConfirmation(user);
+
+        return result;
     } 
 }

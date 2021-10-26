@@ -16,7 +16,6 @@ export class AuthController {
 
     @Post('register')
     register(@Body() user: CreateUserDto): Promise<any> {
-        console.log("user -> ", user);
       return this.authService.register(user);
     }  
     
